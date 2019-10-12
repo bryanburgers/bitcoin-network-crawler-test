@@ -1,0 +1,15 @@
+[package]
+name = "bitcoin-network-crawler-test"
+version = "0.1.0"
+authors = ["Bryan Burgers <bryan@burgers.io>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+async-std = { version = "^0.99", features = ["unstable"] }
+clap = "^2.33"
+futures-preview = { version = "0.3.0-alpha.19", features = ["async-await"] }
+futures-util-preview = { version = "0.3.0-alpha.19", features = ["async-await"] }
+futures-channel-preview = "0.3.0-alpha.19"
+sha2 = "^0.8"
