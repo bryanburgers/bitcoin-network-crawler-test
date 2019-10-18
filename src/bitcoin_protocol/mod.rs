@@ -10,7 +10,7 @@ mod stream_writer;
 
 use component::*;
 pub use messages::*;
-pub use stream_reader::StreamReader;
+pub use stream_reader::{StreamReader, StreamReaderError};
 pub use stream_writer::StreamWriter;
 
 /// A single message to send across the connection in either direction.

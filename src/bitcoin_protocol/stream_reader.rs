@@ -31,10 +31,11 @@ pub struct StreamReader<T> {
 }
 
 /// Errors that can occur.
-#[derive(Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Debug)]
 pub enum StreamReaderError {
     NotEnoughData,
     InvalidHeader,
+    ConnectionError(std::io::Error),
 }
 
 impl<T> StreamReader<T> {
@@ -196,10 +197,10 @@ where
 
             match Pin::new(&mut self.reader).poll_read(cx, &mut buffer[read_bytes.end..]) {
                 Poll::Ready(Err(e)) => {
-                    println!("err={:?}", e);
-                    self.buffer = Some(buffer);
                     // Uh oh. Something happened. Consider the stream done.
-                    return Poll::Ready(None);
+                    self.is_done = true;
+                    self.buffer = Some(buffer);
+                    return Poll::Ready(Some(Err(StreamReaderError::ConnectionError(e))));
                 }
                 Poll::Pending => {
                     self.buffer = Some(buffer);

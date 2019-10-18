@@ -85,10 +85,6 @@ async fn run(network: bitcoin_protocol::Network, address: impl ToSocketAddrs) ->
 
     // Listen for messages on the spawner channel and spawn connections.
     while let Some(mut address) = spawner_receive.next().await {
-        // We have an address. Try to connect!
-        let broker_handle = handle_generator.get_handle(address.clone());
-        task::spawn(run_one(network.clone(), address.clone(), broker_handle));
-
         // It turns out that bitcoin nodes know about the ip/port pair that connected to them. But
         // that's not a listening address! So try to connect to the same address, but at the
         // typical bitcoin port, to see if there's a node there.

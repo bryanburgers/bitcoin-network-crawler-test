@@ -8,6 +8,7 @@ edition = "2018"
 
 [dependencies]
 async-std = { version = "^0.99", features = ["unstable"] }
+chrono = "^0.4"
 clap = "^2.33"
 futures-preview = { version = "0.3.0-alpha.19", features = ["async-await"] }
 futures-util-preview = { version = "0.3.0-alpha.19", features = ["async-await"] }
